@@ -54,11 +54,97 @@
             -webkit-box-orient: vertical;  
             overflow: hidden;
         }
+
+        /* --- THEME STYLES --- */
+        /* LIGHT THEME */
+        html.theme-light body {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+        }
+        html.theme-light .glass-card {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(0, 0, 0, 0.05) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+        }
+        html.theme-light .text-gray-400 { color: #475569 !important; }
+        html.theme-light .text-white { color: #0f172a !important; }
+        html.theme-light .bg-zinc-900 {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            color: #334155 !important;
+        }
+        html.theme-light .text-zinc-500 { color: #64748b !important; }
+        
+        /* Controlli UI (Ricerca e Selettore) per il tema chiaro */
+        html.theme-light #searchInput,
+        html.theme-light #themeSelector {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        html.theme-light #searchInput::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        /* SURPRISE THEME (Pacioccoso/Unicorno) */
+        html.theme-surprise body {
+            font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif !important;
+            background: url('/static/unicorn.jpg') center/cover fixed, linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%) !important;
+            background-blend-mode: soft-light !important;
+            color: #d10068 !important;
+        }
+        html.theme-surprise h1, html.theme-surprise h2, html.theme-surprise h3 {
+            font-weight: 900 !important;
+            color: #ff1493 !important;
+            text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff !important;
+        }
+        html.theme-surprise h1 span.text-transparent, html.theme-surprise h3 span.text-transparent {
+            background: none !important;
+            -webkit-text-fill-color: #ff1493 !important;
+            drop-shadow: none !important;
+        }
+        html.theme-surprise .glass-card {
+            background: rgba(255, 255, 255, 0.7) !important;
+            border: 4px dashed #ff69b4 !important;
+            border-radius: 40px !important;
+            box-shadow: 0 10px 20px rgba(255,105,180,0.3) !important;
+        }
+        html.theme-surprise .text-gray-400 { color: #8a2be2 !important; }
+        html.theme-surprise .text-white { color: #ff1493 !important; }
+        html.theme-surprise .bg-zinc-900 {
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+            color: #d10068 !important;
+            border-radius: 30px !important;
+        }
+        html.theme-surprise input {
+            background-color: #fff0f5 !important;
+            color: #ff1493 !important;
+            border: 3px solid #ff69b4 !important;
+        }
+        html.theme-surprise .hero-glow { display: none !important; }
+        html.theme-surprise .bg-primary {
+            background-color: #ff69b4 !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(255,105,180,0.6) !important;
+        }
+        html.theme-surprise footer { border-color: #ffb6c1 !important; }
     </style>
 </head>
-<body class="bg-darkBg text-gray-200 font-sans min-h-screen relative antialiased selection:bg-primary selection:text-white pb-12">
+<body class="bg-darkBg text-gray-200 font-sans min-h-screen relative antialiased selection:bg-primary selection:text-white pb-12 transition-colors duration-500">
     
     <div class="hero-glow"></div>
+
+    <!-- Theme Switcher -->
+    <div class="absolute top-4 right-4 z-50">
+        <select id="themeSelector" class="bg-zinc-800 border border-zinc-700 text-sm rounded-xl focus:ring-primary focus:border-primary block p-2 text-white shadow-xl cursor-pointer font-medium appearance-none px-4">
+            <option value="system">💻 Tema Sistema</option>
+            <option value="dark">🌙 Tema Scuro</option>
+            <option value="light">☀️ Tema Chiaro</option>
+            <option value="surprise">🦄 Sorpresa!</option>
+        </select>
+    </div>
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header class="text-center mb-10 space-y-4">
@@ -128,8 +214,72 @@
         </main>
     </div>
 
+    <!-- Footer Credits 'Carico' -->
+    <footer class="mt-10 py-10 border-t border-white/5 relative overflow-hidden group">
+        <!-- Effetto glow di sfondo -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-purple-500/10 blur-3xl rounded-t-full opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-4">
+            <span class="text-xs md:text-sm text-zinc-500 font-bold uppercase tracking-[0.3em] mb-4">
+                Powered & Coded By
+            </span>
+            
+            <a href="#" class="relative inline-block hover:-translate-y-1 transition-transform duration-300">
+                <h3 class="text-5xl md:text-7xl font-extrabold italic tracking-tighter leading-normal">
+                    <span class="inline-block py-4 px-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 drop-shadow-[0_0_30px_rgba(99,102,241,0.6)] animate-pulse">
+                        NICK 2026
+                    </span>
+                </h3>
+            </a>
+
+            <!-- Decorazione animata -->
+            <div class="mt-4 flex justify-center items-center gap-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary/50"></div>
+                <div class="flex gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-[ping_1.5s_ease-in-out_infinite]"></span>
+                    <span class="w-2 h-2 rounded-full bg-purple-500 animate-[ping_1.5s_ease-in-out_infinite_0.4s]"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-[ping_1.5s_ease-in-out_infinite_0.8s]"></span>
+                </div>
+                <div class="w-12 h-0.5 bg-gradient-to-l from-transparent to-accent/50"></div>
+            </div>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Theme Switcher Logic
+            const themeSelector = document.getElementById('themeSelector');
+            
+            function applyTheme(theme) {
+                const html = document.documentElement;
+                html.classList.remove('theme-light', 'theme-dark', 'theme-surprise', 'dark');
+                
+                let resolvedTheme = theme;
+                if (theme === 'system') {
+                    resolvedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+
+                if (resolvedTheme === 'dark') {
+                    html.classList.add('dark', 'theme-dark');
+                } else if (theme === 'surprise') {
+                    html.classList.add('theme-surprise');
+                } else {
+                    html.classList.add('theme-light');
+                }
+                
+                localStorage.setItem('techfeed-theme', theme);
+                themeSelector.value = theme;
+            }
+
+            const savedTheme = localStorage.getItem('techfeed-theme') || 'system';
+            applyTheme(savedTheme);
+
+            themeSelector.addEventListener('change', (e) => applyTheme(e.target.value));
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (themeSelector.value === 'system') applyTheme('system');
+            });
+
+            // Search Logic
             const searchInput = document.getElementById('searchInput');
             const articles = document.querySelectorAll('main article');
 
