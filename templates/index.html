@@ -85,6 +85,15 @@
             {% endfor %}
         </div>
 
+        <!-- Ricerca / Filtro Immediato -->
+        <div class="max-w-md mx-auto mb-10 relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i class="fa-solid fa-search text-gray-400"></i>
+            </div>
+            <input type="text" id="searchInput" placeholder="Filtra notizie in questa pagina..." 
+                   class="w-full pl-11 pr-4 py-3 bg-zinc-900/60 border border-zinc-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm backdrop-blur-sm">
+        </div>
+
         <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
             {% for article in articles %}
             <!-- Hero Card: occuopa più colonne -->
@@ -118,5 +127,29 @@
             {% endfor %}
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const articles = document.querySelectorAll('main article');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+
+                    articles.forEach(article => {
+                        const title = article.querySelector('h2')?.textContent.toLowerCase() || '';
+                        const summary = article.querySelector('p')?.textContent.toLowerCase() || '';
+
+                        if (title.includes(searchTerm) || summary.includes(searchTerm)) {
+                            article.style.display = '';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
